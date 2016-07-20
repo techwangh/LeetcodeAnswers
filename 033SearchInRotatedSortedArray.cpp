@@ -46,7 +46,7 @@ public:
   			if(target == nums[mid]) 
   				return mid;
   			else if(nums[left] <= nums[mid]) {		//[left, mid]有序,必须有“=”，处理两个值的情况
-  				if(target >= nums[left] && target < num[mid]) 
+  				if(target >= nums[left] && target < nums[mid]) 
   					right = mid - 1;
   				else
   					left = mid + 1;		//上面已经判断过target == nums[mid]了

@@ -64,7 +64,6 @@ public:
     		}
     		string out;
     		int nSpace = maxWidth - len;
-    		
     		for(int k = i; k < j; ++k) {
     			out += words[k];
     			int spaceLength = 0;
