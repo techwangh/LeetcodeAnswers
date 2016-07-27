@@ -43,3 +43,19 @@ public:
         return s;
     }
 };
+
+
+class Solution {
+public:
+    vector<string> binaryTreePaths(TreeNode* root) {
+  		if(!root) return {};
+  		if(!root->left && !root->right) return {to_string(root->val)};
+  		vector<string> left = binaryTreePaths(root->left);
+  		vector<string> right = binaryTreePaths(root->right);
+  		left.insert(left.end(), right.begin(), right.end());
+  		for(auto &s : left) {
+  			s = to_string(root->val) + "->" + s;
+  		}
+  		return left;
+    }
+};

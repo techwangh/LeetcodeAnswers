@@ -57,34 +57,3 @@ public:
   		return root;
     }
 };
-
-
-class Solution {
-public:
-    TreeNode* buildTree(vector<int>& inorder, vector<int>& postorder) {
-    	stack<TreeNode*> s;
-  		if(postorder.empty()) return NULL;
-  		TreeNode* root = new TreeNode(postorder.back());
-  		s.push(root);
-  		int index = inorder.size()-1;
-  		for(int i = postorder.size()-2; i >= 0; --i) {
-  			TreeNode* cur = s.top();
-  			if(cur->val != inorder[index]) {
-  				cur->right = new TreeNode(postorder[i]);
-  				s.push(cur->right);
-  			}
-  			else {
-  				while(!s.empty() && s.top()->val == inorder[index]) {
-  					cur = s.top();
-  					s.pop();
-  					index--;
-  				}
-  				if(index >= 0) {
-  					cur->left = new TreeNode(postorder[i]);
-  					s.push(cur->left);
-  				}
-  			}
-  		}
-  		return root;
-  	}
-};

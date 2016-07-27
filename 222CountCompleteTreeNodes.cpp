@@ -16,7 +16,7 @@ public:
         return res;
     }
     
-    void count(TreeNode* root, int& num) {
+    void count(TreeNode* root, int& num) {+
         if(root) {
             num++;
             count(root->left, num);
