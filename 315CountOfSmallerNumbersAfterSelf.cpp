@@ -30,3 +30,52 @@ public:
         return res;
     }
 };
+
+
+//use stl functions
+class Solution {
+public:
+    vector<int> countSmaller(vector<int>& nums) {
+        vector<int> t(nums.size()), res(nums.size(), 0);
+        for(int i = nums.size()-1; i >= 0; --i) {
+        	int pos = distance(t.begin(), lower_bound(t.begin(), t.end(), nums[i]));
+        	res[i] = pos;
+        	t.insert(t.begin() + pos, nums[i]);
+        }
+        return res;
+	}
+};
+
+
+class Solution {
+public:
+  	struct TreeNode
+  	{
+  		int smaller, val;
+  		TreeNode *left, *right;
+  		TreeNode(int v, int s) : val(v), smaller(s), left(NULL), right(NULL) {}
+  	};
+
+  	int insert(TreeNode*& root, int val) {
+  		if(!root) {
+  			root = new TreeNode(val, 0);
+  			return 0;
+  		}
+  		if(val < root->val) {
+  			root->smaller++;
+  			return insert(root->left, val);
+  		}
+  		else {
+  			return insert(root->right, val) + root->smaller + (val > root->val ? 1 : 0);
+  		}
+  	}
+
+    vector<int> countSmaller(vector<int>& nums) {
+    	std::vector<int> res(nums.size());
+    	TreeNode* root = NULL;
+    	for(int i = nums.size()-1; i >= 0; --i) {
+    		res[i] = insert(root, nums[i]);
+    	}
+    	return res;
+    }
+};
