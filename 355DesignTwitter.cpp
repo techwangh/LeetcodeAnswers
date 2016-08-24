@@ -28,6 +28,9 @@ public:
     
     /** Follower follows a followee. If the operation is invalid, it should be a no-op. */
     void follow(int followerId, int followeeId) {
+        if(users.find(followerId) == users.end()) {
+            users[followerId].push_back(followerId);
+        }
         users[followerId].push_back(followeeId);
     }
     
