@@ -1,7 +1,6 @@
 class Solution {
 public:
-    vector<int> findOrder(int numCourses, vector<pair<int, int>>& prerequisites) {
-    	vector<int> res;
+    bool canFinish(int numCourses, vector<pair<int, int>>& prerequisites) {
         vector<unordered_set<int>> graph = make_graph(numCourses ,prerequisites);
         vector<int> degrees = computr_degrees(graph);
         for(int i = 0; i < numCourses; ++i) {
@@ -9,14 +8,13 @@ public:
         	for( ; j < numCourses; ++j) {
         		if(!degrees[j]) break;
         	}
-        	if(j == numCourses) return {};
-        	res.push_back(j);
+        	if(j == numCourses) return false;
         	degrees[j] = -1;
         	for(auto neigh : graph[j]) {
         		degrees[neigh]--;
         	}
         }
-        return res;     
+        return true;
     }
 
     vector<unordered_set<int>> make_graph(int numCourses, vector<pair<int, int>>& prerequisites) {
@@ -27,7 +25,7 @@ public:
     	return graph;
     }
 
-    vector<int> computr_degrees(ector<unordered_set<int>> graph) {
+    vector<int> computr_degrees(vector<unordered_set<int>> graph) {
     	vector<int> degrees(graph.size(), 0);
     	for(auto& neighbors : graph) {
     		for(auto neigh : neighbors) {
